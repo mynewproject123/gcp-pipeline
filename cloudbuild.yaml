@@ -15,6 +15,7 @@ steps:
       - 'push'
       - 'us-central1-docker.pkg.dev/cloud-computing-448017/uma-100994095/app:$COMMIT_SHA'  # Ensure [PROJECT_ID] and [ARTIFACT_REGISTRY_NAME] are correct
 
+logsBucket: "gs://logs-bucket-uma/"  # Moved this to the correct location
+
 options:
-  logging: GCS_ONLY  # Changed from NONE to GCS_ONLY for valid logging option
-  logsBucket: "gs://logs-bucket-uma/"  # Fixed incorrect quotation marks
+  logging: GCS_ONLY  # Ensures build logs are stored in a Cloud Storage bucket
