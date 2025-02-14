@@ -17,4 +17,5 @@ steps:
 
 options:
   logging: NONE # This ensures build logs are stored in a regional bucket owned by the user
+  logsBucket: “gs://[logs-bucket-uma]/”
 
