@@ -1,0 +1,20 @@
+# cloudbuild.yaml - Google Cloud Build Configuration File
+
+steps:
+  # Step 1: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: 
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/cloud-computing-448017/uma-100994095/app:$COMMIT_SHA'  # Replace [PROJECT_ID] and [ARTIFACT_REGISTRY_NAME]
+      - '.'
+
+  # Step 2: Push the Docker image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: 
+      - 'push'
+      - 'us-central1-docker.pkg.dev/cloud-computing-448017/uma-100994095/app:$COMMIT_SHA'  # Replace [PROJECT_ID] and [ARTIFACT_REGISTRY_NAME]
+
+options:
+  logging: REGIONAL_USER_OWNED_BUCKET  # This ensures build logs are stored in a regional bucket owned by the user
+
