@@ -6,16 +6,15 @@ steps:
     args: 
       - 'build'
       - '-t'
-      - 'us-central1-docker.pkg.dev/cloud-computing-448017/uma-100994095/app:$COMMIT_SHA'  # Replace [PROJECT_ID] and [ARTIFACT_REGISTRY_NAME]
+      - 'us-central1-docker.pkg.dev/cloud-computing-448017/uma-100994095/app:$COMMIT_SHA'  # Ensure [PROJECT_ID] and [ARTIFACT_REGISTRY_NAME] are correct
       - '.'
 
   # Step 2: Push the Docker image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: 
       - 'push'
-      - 'us-central1-docker.pkg.dev/cloud-computing-448017/uma-100994095/app:$COMMIT_SHA'  # Replace [PROJECT_ID] and [ARTIFACT_REGISTRY_NAME]
+      - 'us-central1-docker.pkg.dev/cloud-computing-448017/uma-100994095/app:$COMMIT_SHA'  # Ensure [PROJECT_ID] and [ARTIFACT_REGISTRY_NAME] are correct
 
 options:
-  logging: NONE # This ensures build logs are stored in a regional bucket owned by the user
-  logsBucket: “gs://[logs-bucket-uma]/”
-
+  logging: GCS_ONLY  # Changed from NONE to GCS_ONLY for valid logging option
+  logsBucket: "gs://logs-bucket-uma/"  # Fixed incorrect quotation marks
