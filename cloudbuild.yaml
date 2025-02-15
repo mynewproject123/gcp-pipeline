@@ -22,4 +22,18 @@ steps:
       - 'deploy'
       - 'app-service'  # Replace with your Cloud Run service name
       - '--image'
-      - 'us-central1-docker.pkg.dev/cloud-computing-448017/uma-10099
+      - 'us-central1-docker.pkg.dev/cloud-computing-448017/uma-100994095/app:$COMMIT_SHA'  # Ensure correct image path
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+
+images:
+  - 'us-central1-docker.pkg.dev/cloud-computing-448017/uma-100994095/app:$COMMIT_SHA'  # Ensure [PROJECT_ID] and [ARTIFACT_REGISTRY_NAME] are correct
+
+logsBucket: "gs://logs-bucket-uma/"  # Use the correct logs bucket for your project
+
+options:
+  logging: GCS_ONLY  # Ensures build logs are stored in a Cloud Storage bucket
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET  # Creates a new bucket in the same region as the project to store logs
